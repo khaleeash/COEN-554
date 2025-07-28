@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodExpress - Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🍔 FoodExpress</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#cart">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Order Delicious Food Online</h2>
+            <p>Fast delivery to your doorstep!</p>
+        </section>
+
+        <section id="menu">
+            <h2>Our Menu</h2>
+            <div class="menu-items" id="menu-items">
+                <!-- Menu items load here via JavaScript -->
+            </div>
+        </section>
+
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <button id="checkout-btn">Checkout</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 FoodExpress. Group: U18CO1029, U18CO1019, U18CO1026, U18CO1093, U16CO1037</p>
+    </footer>
+
+    <!-- Firebase & App Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
