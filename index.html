@@ -4,535 +4,758 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>McDonald's - Official Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Global Styles */
-        :root {
-            --mcd-red: #ff0000;
-            --mcd-yellow: #ffc72c;
-            --mcd-dark: #27251f;
-            --mcd-light: #f7f7f7;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', Arial, sans-serif;
-        }
-        
-        body {
-            background-color: var(--mcd-light);
-            color: var(--mcd-dark);
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--mcd-red);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            height: 50px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 25px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--mcd-yellow);
-        }
-        
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .cart-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--mcd-yellow);
-            color: var(--mcd-dark);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 500px;
-            background-image: url('https://tse1.mm.bing.net/th/id/OIP.DngIR4zfla_FqyyUuBV1tAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-        }
-        
-        .hero-content {
-            background-color: rgba(0,0,0,0.6);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--mcd-yellow);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--mcd-red);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: var(--mcd-yellow);
-            color: var(--mcd-dark);
-            transform: translateY(-3px);
-        }
-        
-        /* Menu Section */
-        .menu-section {
-            max-width: 1200px;
-            margin: 0 auto 50px;
-            padding: 0 20px;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--mcd-red);
-            display: inline-block;
-            background-color: var(--mcd-light);
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: var(--mcd-red);
-            z-index: 0;
-        }
-        
-        .menu-categories {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .category-btn {
-            background: none;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--mcd-dark);
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .category-btn.active, .category-btn:hover {
-            color: var(--mcd-red);
-            border-bottom: 3px solid var(--mcd-red);
-        }
-        
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .menu-item {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .menu-item:hover {
-            transform: translateY(-10px);
-        }
-        
-        .item-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .item-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .menu-item:hover .item-image img {
-            transform: scale(1.1);
-        }
-        
-        .item-info {
-            padding: 20px;
-        }
-        
-        .item-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--mcd-dark);
-        }
-        
-        .item-info p {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        
-        .item-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--mcd-red);
-        }
-        
-        .add-to-cart {
-            background-color: var(--mcd-yellow);
-            color: var(--mcd-dark);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .add-to-cart:hover {
-            background-color: var(--mcd-red);
-            color: white;
-        }
-        
-        /* Cart Modal */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100vh;
-            background-color: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s;
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        
-        .cart-modal.active {
-            right: 0;
-        }
-        
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .close-cart {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .cart-items {
-            margin-bottom: 20px;
-        }
-        
-        .cart-item {
-            display: flex;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .cart-item-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-right: 15px;
-        }
-        
-        .cart-item-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .cart-item-details {
-            flex: 1;
-        }
-        
-        .cart-item-details h4 {
-            margin-bottom: 5px;
-        }
-        
-        .cart-item-price {
-            color: var(--mcd-red);
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-        }
-        
-        .quantity-btn {
-            background-color: #eee;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .quantity {
-            margin: 0 10px;
-        }
-        
-        .remove-item {
-            background: none;
-            border: none;
-            color: #ff6b6b;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        
-        .cart-total {
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: right;
-            margin-bottom: 20px;
-        }
-        
-        .checkout-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--mcd-red);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .checkout-btn:hover {
-            background-color: var(--mcd-dark);
-        }
-        
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--mcd-dark);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        
-        .footer-logo {
-            height: 60px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--mcd-yellow);
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links ul li a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links ul li a:hover {
-            color: var(--mcd-yellow);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--mcd-yellow);
-        }
-        
-        .copyright {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            color: #999;
-            font-size: 14px;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                margin-top: 15px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .menu-items {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .cart-modal {
-                width: 100%;
-                max-width: 350px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            nav ul li {
-                margin-left: 15px;
-            }
-            
-            .hero {
-                height: 400px;
-            }
-            
-            .menu-items {
-                grid-template-columns: 1fr;
-            }
-        }
+/* Global Styles */
+:root {
+    --mcd-red: #ff0000;
+    --mcd-yellow: #ffc72c;
+    --mcd-dark: #27251f;
+    --mcd-light: #f7f7f7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--mcd-light);
+    color: var(--mcd-dark);
+}
+
+/* Header Styles */
+header {
+    background-color: var(--mcd-red);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    height: 50px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--mcd-yellow);
+}
+
+/* Active tab link style (moved from media query) */
+header nav a.active {
+    background: #f2f2f2;
+    color: #111;
+    border-radius: 8px;
+}
+
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--mcd-yellow);
+    color: var(--mcd-dark);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    height: 500px;
+    background-image: url('https://tse1.mm.bing.net/th/id/OIP.DngIR4zfla_FqyyUuBV1tAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.hero-content {
+    background-color: rgba(0,0,0,0.6);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--mcd-yellow);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--mcd-red);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--mcd-yellow);
+    color: var(--mcd-dark);
+    transform: translateY(-3px);
+}
+
+/* Menu Section */
+.menu-section {
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    color: var(--mcd-red);
+    display: inline-block;
+    background-color: var(--mcd-light);
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--mcd-red);
+    z-index: 0;
+}
+
+.menu-categories {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--mcd-dark);
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.category-btn.active, .category-btn:hover {
+    color: var(--mcd-red);
+    border-bottom: 3px solid var(--mcd-red);
+}
+
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.menu-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.menu-item:hover {
+    transform: translateY(-10px);
+}
+
+.item-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.menu-item:hover .item-image img {
+    transform: scale(1.1);
+}
+
+.item-info {
+    padding: 20px;
+}
+
+.item-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--mcd-dark);
+}
+
+.item-info p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.item-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--mcd-red);
+}
+
+.add-to-cart {
+    background-color: var(--mcd-yellow);
+    color: var(--mcd-dark);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: var(--mcd-red);
+    color: white;
+}
+
+/* Cart Modal */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.3s;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.cart-modal.active {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.cart-items {
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h4 {
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    color: var(--mcd-red);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    background-color: #eee;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity {
+    margin: 0 10px;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.cart-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--mcd-red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: var(--mcd-dark);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Footer */
+footer {
+    background-color: var(--mcd-dark);
+    color: white;
+    padding: 50px 0 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer-logo {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.footer-links h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--mcd-yellow);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: var(--mcd-yellow);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--mcd-yellow);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+    }
+    nav ul {
+        margin-top: 15px;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .menu-items {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    .cart-modal {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li {
+        margin-left: 15px;
+    }
+    .hero {
+        height: 400px;
+    }
+    .menu-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tab Styles */
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* Deals Section Specific Styles */
+.deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.deal-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.deal-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.deal-item .deal-info {
+    padding: 1rem;
+}
+
+.deal-item h3 {
+    margin-bottom: 0.5rem;
+}
+
+.deal-item .deal-price {
+    font-weight: bold;
+    color: #d32f2f;
+    margin-bottom: 0.5rem;
+}
+
+.deal-item .original-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.deal-item .btn {
+    background: #d32f2f;
+    color: #fff;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
+
+.app-promo {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.app-promo h3 {
+    margin-bottom: 0.5rem;
+}
+
+.app-promo .app-btn {
+    background: #ffc107;
+    color: #000;
+    font-weight: bold;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* Locations Section Specific Styles */
+.map-container {
+    margin: 1rem 0;
+}
+
+.locations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.location-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.location-item .direction-link {
+    color: #d32f2f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.more-locations {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* About Section Specific Styles */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.about-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.about-item ul {
+    padding-left: 20px;
+}
+
+.about-more-info {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.about-more-info img {
+    width: 80px;
+    margin-bottom: 0.5rem;
+}
+
+/* Contact Section Specific Styles */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.contact-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.contact-item .social-links-contact {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contact-item .social-links-contact a {
+    text-decoration: none;
+    color: var(--mcd-dark);
+}
+
+#contact-form {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 680px;
+}
+
+#contact-form label {
+    display: block;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#contact-form .form-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+#contact-form .btn {
+    background: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#contact-form .secondary-btn {
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: var(--mcd-dark);
+}
+
+#contact-success {
+    display: none;
+    margin-top: 0.5rem;
+    color: green;
+    font-weight: 600;
+}
+
+.faqs {
+    margin-top: 1.5rem;
+    max-width: 780px;
+}
+
+.faqs details {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+.faqs summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.faqs p {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
     </style>
 </head>
 <body>
@@ -542,7 +765,7 @@
             <img src="https://www.bing.com/th/id/OIP.72E59kNKgzAR4nJ5x0ZDHQHaEK?w=276&h=211&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="McDonald's Logo" class="logo">
             <nav>
                 <ul>
-                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#menu" class="active" aria-selected="true">Menu</a></li>
                     <li><a href="#deals">Deals</a></li>
                     <li><a href="#locations">Locations</a></li>
                     <li><a href="#about">About</a></li>
@@ -556,7 +779,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Global) -->
     <section class="hero">
         <div class="hero-content">
             <h1>Try Our New Big Mac®</h1>
@@ -565,25 +788,222 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section class="menu-section" id="menu">
-        <div class="section-title">
-            <h2>Our Menu</h2>
-        </div>
-        
-        <div class="menu-categories">
-            <button class="category-btn active" data-category="all">All Items</button>
-            <button class="category-btn" data-category="burgers">Burgers</button>
-            <button class="category-btn" data-category="chicken">Chicken</button>
-            <button class="category-btn" data-category="fries">Fries & Sides</button>
-            <button class="category-btn" data-category="drinks">Drinks</button>
-            <button class="category-btn" data-category="desserts">Desserts</button>
-        </div>
-        
-        <div class="menu-items" id="menu-items">
-            <!-- Menu items will be added dynamically with JavaScript -->
-        </div>
-    </section>
+    <main id="tab-root" tabindex="-1">
+        <!-- Menu Section -->
+        <section id="menu" class="tab-pane active">
+            <div class="section-title">
+                <h2>Our Menu</h2>
+            </div>
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="all">All Items</button>
+                <button class="category-btn" data-category="burgers">Burgers</button>
+                <button class="category-btn" data-category="chicken">Chicken</button>
+                <button class="category-btn" data-category="fries">Fries & Sides</button>
+                <button class="category-btn" data-category="drinks">Drinks</button>
+                <button class="category-btn" data-category="desserts">Desserts</button>
+            </div>
+            <div class="menu-items" id="menu-items">
+                <!-- Menu items will be added dynamically with JavaScript -->
+            </div>
+        </section>
+
+        <!-- DEALS TAB -->
+        <section id="deals" class="tab-pane">
+            <h2>Exclusive Deals & Offers</h2>
+            <p>Save big on your favorites! These combo deals are available for a limited time.</p>
+
+            <div class="deals-grid">
+                <!-- Big Mac Combo -->
+                <div class="deal-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Big_Mac_hamburger.jpg" alt="Big Mac Combo">
+                    <div class="deal-info">
+                        <h3>Big Mac® Combo</h3>
+                        <p>Big Mac®, medium fries, and a drink.</p>
+                        <p class="deal-price">$7.99 <span class="original-price">$9.49</span></p>
+                        <a href="#menu" class="btn">Order Now</a>
+                    </div>
+                </div>
+
+                <!-- 10-pc Nuggets Combo -->
+                <div class="deal-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Chicken_McNuggets.jpg" alt="Chicken McNuggets Combo">
+                    <div class="deal-info">
+                        <h3>10-pc Chicken McNuggets® Combo</h3>
+                        <p>10 nuggets, medium fries, and a drink.</p>
+                        <p class="deal-price">$6.99 <span class="original-price">$8.49</span></p>
+                        <a href="#menu" class="btn">Order Now</a>
+                    </div>
+                </div>
+
+                <!-- Breakfast Combo -->
+                <div class="deal-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Egg_McMuffin.jpg" alt="Breakfast Combo">
+                    <div class="deal-info">
+                        <h3>Breakfast Combo</h3>
+                        <p>Egg McMuffin®, hash browns, and hot coffee.</p>
+                        <p class="deal-price">$5.49 <span class="original-price">$6.49</span></p>
+                        <a href="#menu" class="btn">Order Now</a>
+                    </div>
+                </div>
+
+                <!-- Double Cheeseburger Combo -->
+                <div class="deal-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Double_cheeseburger.jpg" alt="Double Cheeseburger Combo">
+                    <div class="deal-info">
+                        <h3>Double Cheeseburger Combo</h3>
+                        <p>Double cheeseburger, small fries, and a drink.</p>
+                        <p class="deal-price">$6.49 <span class="original-price">$7.49</span></p>
+                        <a href="#menu" class="btn">Order Now</a>
+                    </div>
+                </div>
+
+                <!-- Fries & McFlurry Combo -->
+                <div class="deal-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/McFlurry_with_Oreo.jpg" alt="McFlurry and Fries">
+                    <div class="deal-info">
+                        <h3>Treat Duo</h3>
+                        <p>McFlurry® with OREO® and fries.</p>
+                        <p class="deal-price">$3.99 <span class="original-price">$5.49</span></p>
+                        <a href="#menu" class="btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-promo">
+                <h3>🎁 Download Our App for More Deals!</h3>
+                <a href="#" class="btn app-btn">Get the App</a>
+            </div>
+        </section>
+
+        <!-- ====== LOCATIONS TAB ====== -->
+        <section id="locations" class="tab-pane">
+            <h2>Find a McDonald's Near You</h2>
+            <p>We’re closer than you think! Visit one of our locations for your favorite meals.</p>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31692.96972758785!2d3.3792056568478997!3d6.524379317085058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf55e6cfad621%3A0x62df4bbd1b47b8!2sMcDonald's!5e0!3m2!1sen!2sng!4v1685712345678" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <div class="locations-list">
+                <div class="location-item">
+                    <h3>McDonald's Ikeja City Mall</h3>
+                    <p><strong>Address:</strong> Ikeja City Mall, Lagos, Nigeria</p>
+                    <p><strong>Hours:</strong> Mon–Sun: 7:00 AM – 11:00 PM</p>
+                    <p><strong>Phone:</strong> +234 701 234 5678</p>
+                    <a href="https://goo.gl/maps/abcd" target="_blank" class="direction-link">Get Directions →</a>
+                </div>
+                <div class="location-item">
+                    <h3>McDonald's Victoria Island</h3>
+                    <p><strong>Address:</strong> Ahmadu Bello Way, Victoria Island, Lagos</p>
+                    <p><strong>Hours:</strong> Mon–Sun: 6:30 AM – Midnight</p>
+                    <p><strong>Phone:</strong> +234 703 987 6543</p>
+                    <a href="https://goo.gl/maps/efgh" target="_blank" class="direction-link">Get Directions →</a>
+                </div>
+                <div class="location-item">
+                    <h3>McDonald's Abuja Central</h3>
+                    <p><strong>Address:</strong> Central Business District, Abuja</p>
+                    <p><strong>Hours:</strong> Mon–Sun: 7:00 AM – 11:30 PM</p>
+                    <p><strong>Phone:</strong> +234 802 123 4567</p>
+                    <a href="https://goo.gl/maps/ijkl" target="_blank" class="direction-link">Get Directions →</a>
+                </div>
+            </div>
+
+            <div class="more-locations">
+                <a href="https://www.mcdonalds.com/us/en-us/restaurant-locator.html" target="_blank" class="btn">Find More Locations</a>
+            </div>
+        </section>
+
+        <!-- ====== ABOUT TAB ====== -->
+        <section id="about" class="tab-pane">
+            <h2>About McDonald's</h2>
+            <p>Since 1955, McDonald's has been serving smiles with our iconic burgers, fries, and more. We are the world's leading global foodservice retailer with over 38,000 locations across more than 100 countries. Our mission is simple: deliver delicious food quickly and conveniently while maintaining top quality and outstanding customer service.</p>
+
+            <div class="about-grid">
+                <div class="about-item">
+                    <h3>Our Vision</h3>
+                    <p>To be the favorite place and way for people to enjoy their meals by combining innovation, affordability, and unmatched service.</p>
+                </div>
+                <div class="about-item">
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li>Quality & Freshness</li>
+                        <li>Speed & Convenience</li>
+                        <li>Integrity in Every Bite</li>
+                        <li>Commitment to Communities</li>
+                    </ul>
+                </div>
+                <div class="about-item">
+                    <h3>Sustainability</h3>
+                    <p>We aim to reduce waste, source responsibly, and support local farmers. Our initiatives include recyclable packaging and energy-efficient restaurants.</p>
+                </div>
+            </div>
+
+            <div class="about-more-info">
+                <img src="https://www.mcdonalds.com/content/dam/sites/usa/nfl/icons/mcd-logo.png" alt="McDonald's Logo">
+                <p>Serving happiness for over 60 years. Want to know more about our journey?</p>
+                <a href="https://www.mcdonalds.com" target="_blank" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <!-- ====== CONTACT TAB ====== -->
+        <section id="contact" class="tab-pane">
+            <h2>Contact Us</h2>
+            <p>Got a question, feedback, or craving? Reach out — we’ll be glad to help.</p>
+
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Customer Care</h3>
+                    <p><strong>Phone:</strong> <a href="tel:+2347060740970">+234 706 074 0970</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:support@mcd-example.ng">support mcd@gmail.com</a></p>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/2347060740970" target="_blank">Chat on WhatsApp</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Head Office (NG)</h3>
+                    <p>Ahmadu Bello Way, Victoria Island, Lagos</p>
+                    <p><a href="https://maps.google.com/?q=Ahmadu+Bello+Way+Victoria+Island+Lagos" target="_blank">Get Directions →</a></p>
+                    <p><strong>Hours:</strong> Mon–Sun, 7:00 AM – 11:00 PM</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Follow Us</h3>
+                    <p class="social-links-contact">
+                        <a href="https://www.facebook.com/mcdonalds" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/mcdonalds" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/mcdonalds" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.youtube.com/mcdonalds" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </p>
+                </div>
+            </div>
+
+            <form id="contact-form">
+                <label>Full Name
+                    <input type="text" name="name" required placeholder="Your name">
+                </label>
+                <label>Email
+                    <input type="email" name="email" required placeholder="you@example.com">
+                </label>
+                <label>Subject
+                    <input type="text" name="subject" required placeholder="What’s this about?">
+                </label>
+                <label>Message
+                    <textarea name="message" rows="5" required placeholder="Type your message…"></textarea>
+                </label>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Send Message</button>
+                    <a href="mailto:support@mcd-example.ng" class="btn secondary-btn">Email Instead</a>
+                </div>
+
+                <p id="contact-success" class="success-message">✅ Thanks! Your message has been received. We’ll get back to you shortly.</p>
+            </form>
+
+            <div class="faqs">
+                <h3>FAQs</h3>
+                <details><summary>Do you offer delivery?</summary><p>Yes — order via our app or your favorite delivery partner in your area.</p></details>
+                <details><summary>How can I apply for a job?</summary><p>Visit the Careers page under <em>Information → Careers</em> in the footer.</p></details>
+                <details><summary>Where can I find nutrition info?</summary><p>See <em>Information → Nutrition Info</em> in the footer for detailed charts.</p></details>
+            </div>
+        </section>
+    </main>
 
     <!-- Cart Modal -->
     <div class="cart-modal" id="cart-modal">
@@ -609,10 +1029,10 @@
                 <img src="https://th.bing.com/th/id/OIP.jTA7FJCEMswmel_b0nVHIwAAAA?w=80&h=80&c=1&bgcl=9660ee&r=0&o=7&pid=ImgRC&rm=3" alt="McDonald's Logo" class="footer-logo">
                 <p>McDonald's is the world's leading global foodservice retailer with over 38,000 locations in over 100 countries.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook">f</i></a>
-                    <a href="#"><i class="fab fa-twitter">t</i></a>
-                    <a href="#"><i class="fab fa-instagram">i</i></a>
-                    <a href="#"><i class="fab fa-youtube">y</i></a>
+                    <a href="https://www.facebook.com/mcdonalds" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/mcdonalds" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/mcdonalds" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/mcdonalds" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             
@@ -655,261 +1075,313 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Menu Data
-        const menuData = [
-            {
-                id: 1,
-                name: "Big Mac®",
-                category: "burgers",
-                price: 4.99,
-                description: "The one and only McDonald's Big Mac® - two 100% pure beef patties and Big Mac® sauce sandwiched between a sesame seed bun.",
-                image: "https://tse2.mm.bing.net/th/id/OIP.XIgGF8lmnV-_964e62fckwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-            },
-            {
-                id: 2,
-                name: "Quarter Pounder® with Cheese",
-                category: "burgers",
-                price: 5.29,
-                description: "Each Quarter Pounder® with Cheese burger features a ¼ lb.* of 100% fresh beef that's hot, deliciously juicy and cooked when you order.",
-                image: "https://tse2.mm.bing.net/th/id/OIP.roMn_-POMTRyiQqTsSEezQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3r"
-            },
-            {
-                id: 3,
-                name: "McChicken®",
-                category: "chicken",
-                price: 3.99,
-                description: "It's a classic for a reason. Savor the satisfying crunch of our juicy chicken patty, topped with shredded lettuce and just the right amount of creamy mayonnaise, all served on a perfectly toasted bun.",
-                image: "https://th.bing.com/th/id/R.80da4f427dc4385893f4af617a1a76b7?rik=0zgMnS2qFygp3g&riu=http%3a%2f%2fmcdonalds.eg%2fCms_Data%2fContents%2fEn%2fMedia%2fimages%2fMenu%2flarge-Image%2fMcChicken.png&ehk=tYJuo5%2bTMrxsLZmTKoBw8xhg1mfM5PpEPxkQUJ7nznk%3d&risl=&pid=ImgRaw&r=0"
-            },
-            {
-                id: 4,
-                name: "Chicken McNuggets® (10 pc)",
-                category: "chicken",
-                price: 5.99,
-                description: "Our tender, juicy Chicken McNuggets® are made with 100% white meat chicken and no artificial colors, flavors or preservatives.",
-                image: "https://tse3.mm.bing.net/th/id/OIP.OCSps_jd_mMMDTTxWmRSEAAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-            },
-            {
-                id: 5,
-                name: "World Famous Fries® (Large)",
-                category: "fries",
-                price: 2.99,
-                description: "Golden on the outside, fluffy on the inside—our World Famous Fries® are cut from whole potatoes and cooked to perfection.",
-                image: "https://th.bing.com/th/id/R.1b90bf22cc1cf88d1a69ca2ddd57753d?rik=AVmEi%2bOJyB5mlg&pid=ImgRaw&r=0"
-            },
-            {
-                id: 6,
-                name: "Coca-Cola® (Medium)",
-                category: "drinks",
-                price: 1.99,
-                description: "Enjoy the refreshing taste of Coca-Cola®.",
-                image: "https://th.bing.com/th/id/R.2e9bb894321f9f6e65fee3c8abbcd60d?rik=vyVvEFcOLOBHCg&riu=http%3a%2f%2fwww.freeiconspng.com%2fuploads%2fcoca-cola-drink-png-image-coca-cola-format-png-9.png&ehk=rC6DZAus5nRmReLFmR5vXEDDokATAiPbIfvBPGFJK80%3d&risl=&pid=ImgRaw&r=0"
-            },
-            {
-                id: 7,
-                name: "McFlurry® with OREO® Cookies",
-                category: "desserts",
-                price: 3.49,
-                description: "The classic McFlurry® dessert with OREO® Cookies blended with our creamy vanilla soft serve.",
-                image: "https://tse3.mm.bing.net/th/id/OIP.0CO8Cx725ifWVapwX9kCQQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-            },
-            {
-                id: 8,
-                name: "Apple Pie",
-                category: "desserts",
-                price: 1.99,
-                description: "Our classic Apple Pie is made with 100% American-grown apples, with a lattice crust baked to perfection.",
-                image: "https://joyfoodsunshine.com/wp-content/uploads/2019/08/best-apple-pie-recipe-from-scratch-8.jpg"
-            }
-        ];
+// Menu Data
+const menuData = [
+    {
+        id: 1,
+        name: "Big Mac®",
+        category: "burgers",
+        price: 4.99,
+        description: "The one and only McDonald\\'s Big Mac® - two 100% pure beef patties and Big Mac® sauce sandwiched between a sesame seed bun.",
+        image: "https://tse2.mm.bing.net/th/id/OIP.XIgGF8lmnV-_964e62fckwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+        id: 2,
+        name: "Quarter Pounder® with Cheese",
+        category: "burgers",
+        price: 5.29,
+        description: "Each Quarter Pounder® with Cheese burger features a ¼ lb.* of 100% fresh beef that\\\'s hot, deliciously juicy and cooked when you order.",
+        image: "https://tse2.mm.bing.net/th/id/OIP.roMn_-POMTRyiQqTsSEezQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3r"
+    },
+    {
+        id: 3,
+        name: "McChicken®",
+        category: "chicken",
+        price: 3.99,
+        description: "It\\\'s a classic for a reason. Savor the satisfying crunch of our juicy chicken patty, topped with shredded lettuce and just the right amount of creamy mayonnaise, all served on a perfectly toasted bun.",
+        image: "https://th.bing.com/th/id/R.80da4f427dc4385893f4af617a1a76b7?rik=0zgMnS2qFygp3g&riu=http%3a%2f%2fmcdonalds.eg%2fCms_Data%2fContents%2fEn%2fMedia%2fimages%2fMenu%2flarge-Image%2fMcChicken.png&ehk=tYJuo5%2bTMrxsLZmTKoBw8xhg1mfM5PpEPxkQUJ7nznk%3d&risl=&pid=ImgRaw&r=0"
+    },
+    {
+        id: 4,
+        name: "Chicken McNuggets® (10 pc)",
+        category: "chicken",
+        price: 5.99,
+        description: "Our tender, juicy Chicken McNuggets® are made with 100% white meat chicken and no artificial colors, flavors or preservatives.",
+        image: "https://tse3.mm.bing.net/th/id/OIP.OCSps_jd_mMMDTTxWmRSEAAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+        id: 5,
+        name: "World Famous Fries® (Large)",
+        category: "fries",
+        price: 2.99,
+        description: "Golden on the outside, fluffy on the inside—our World Famous Fries® are cut from whole potatoes and cooked to perfection.",
+        image: "https://th.bing.com/th/id/R.1b90bf22cc1cf88d1a69ca2ddd57753d?rik=AVmEi%2bOJyB5mlg&pid=ImgRaw&r=0"
+    },
+    {
+        id: 6,
+        name: "Coca-Cola® (Medium)",
+        category: "drinks",
+        price: 1.99,
+        description: "Enjoy the refreshing taste of Coca-Cola®.",
+        image: "https://th.bing.com/th/id/R.2e9bb894321f9f6e65fee3c8abbcd60d?rik=vyVvEFcOLOBHCg&riu=http%3a%2f%2fwww.freeiconspng.com%2fuploads%2fcoca-cola-drink-png-image-coca-cola-format-png-9.png&ehk=rC6DZAus5nRmReLFmR5vXEDDokATAiPbIfvBPGFJK80%3d&risl=&pid=ImgRaw&r=0"
+    },
+    {
+        id: 7,
+        name: "McFlurry® with OREO® Cookies",
+        category: "desserts",
+        price: 3.49,
+        description: "The classic McFlurry® dessert with OREO® Cookies blended with our creamy vanilla soft serve.",
+        image: "https://tse3.mm.bing.net/th/id/OIP.0CO8Cx725ifWVapwX9kCQQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+        id: 8,
+        name: "Apple Pie",
+        category: "desserts",
+        price: 1.99,
+        description: "Our classic Apple Pie is made with 100% American-grown apples, with a lattice crust baked to perfection.",
+        image: "https://joyfoodsunshine.com/wp-content/uploads/2019/08/best-apple-pie-recipe-from-scratch-8.jpg"
+    }
+];
 
-        // DOM Elements
-        const menuItemsContainer = document.getElementById('menu-items');
-        const cartIcon = document.getElementById('cart-icon');
-        const cartModal = document.getElementById('cart-modal');
-        const closeCart = document.getElementById('close-cart');
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartCount = document.getElementById('cart-count');
-        const cartTotal = document.getElementById('cart-total');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        const overlay = document.getElementById('overlay');
-        const categoryBtns = document.querySelectorAll('.category-btn');
+// DOM Elements
+const menuItemsContainer = document.getElementById("menu-items");
+const cartIcon = document.getElementById("cart-icon");
+const cartModal = document.getElementById("cart-modal");
+const closeCart = document.getElementById("close-cart");
+const cartItemsContainer = document.getElementById("cart-items");
+const cartCount = document.getElementById("cart-count");
+const cartTotal = document.getElementById("cart-total");
+const checkoutBtn = document.getElementById("checkout-btn");
+const overlay = document.getElementById("overlay");
+const categoryBtns = document.querySelectorAll(".category-btn");
+const contactForm = document.getElementById("contact-form");
+const contactSuccessMessage = document.getElementById("contact-success");
 
-        // Cart State
-        let cart = [];
+// Cart State
+let cart = [];
 
-        // Display Menu Items
-        function displayMenuItems(menuItems) {
-            menuItemsContainer.innerHTML = menuItems.map(item => `
-                <div class="menu-item" data-category="${item.category}">
-                    <div class="item-image">
-                        <img src="${item.image}" alt="${item.name}">
-                    </div>
-                    <div class="item-info">
-                        <h3>${item.name}</h3>
-                        <p>${item.description}</p>
-                        <div class="item-price">
-                            <span class="price">$${item.price.toFixed(2)}</span>
-                            <button class="add-to-cart" data-id="${item.id}">Add to Cart</button>
-                        </div>
-                    </div>
+// Display Menu Items
+function displayMenuItems(menuItems) {
+    menuItemsContainer.innerHTML = menuItems.map(item => `
+        <div class="menu-item" data-category="${item.category}">
+            <div class="item-image">
+                <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="item-info">
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+                <div class="item-price">
+                    <span class="price">$${item.price.toFixed(2)}</span>
+                    <button class="add-to-cart" data-id="${item.id}">Add to Cart</button>
                 </div>
-            `).join('');
-            
-            // Add event listeners to "Add to Cart" buttons
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', addToCart);
-            });
-        }
+            </div>
+        </div>
+    `).join("");
+    
+    // Add event listeners to "Add to Cart" buttons
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", addToCart);
+    });
+}
 
-        // Add to Cart
-        function addToCart(e) {
-            const id = parseInt(e.target.dataset.id);
-            const item = menuData.find(item => item.id === id);
-            
-            // Check if item already in cart
-            const existingItem = cart.find(item => item.id === id);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    ...item,
-                    quantity: 1
-                });
-            }
-            
-            updateCart();
-        }
-
-        // Update Cart
-        function updateCart() {
-            // Update cart count
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            cartCount.textContent = totalItems;
-            
-            // Update cart items display
-            cartItemsContainer.innerHTML = cart.map(item => `
-                <div class="cart-item" data-id="${item.id}">
-                    <div class="cart-item-image">
-                        <img src="${item.image}" alt="${item.name}">
-                    </div>
-                    <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn decrease">-</button>
-                            <span class="quantity">${item.quantity}</span>
-                            <button class="quantity-btn increase">+</button>
-                        </div>
-                        <button class="remove-item">Remove</button>
-                    </div>
-                </div>
-            `).join('');
-            
-            // Update cart total
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = total.toFixed(2);
-            
-            // Add event listeners to quantity buttons
-            document.querySelectorAll('.decrease').forEach(button => {
-                button.addEventListener('click', decreaseQuantity);
-            });
-            
-            document.querySelectorAll('.increase').forEach(button => {
-                button.addEventListener('click', increaseQuantity);
-            });
-            
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', removeItem);
-            });
-        }
-
-        // Decrease Quantity
-        function decreaseQuantity(e) {
-            const id = parseInt(e.target.closest('.cart-item').dataset.id);
-            const item = cart.find(item => item.id === id);
-            
-            if (item.quantity > 1) {
-                item.quantity -= 1;
-            } else {
-                cart = cart.filter(item => item.id !== id);
-            }
-            
-            updateCart();
-        }
-
-        // Increase Quantity
-        function increaseQuantity(e) {
-            const id = parseInt(e.target.closest('.cart-item').dataset.id);
-            const item = cart.find(item => item.id === id);
-            item.quantity += 1;
-            updateCart();
-        }
-
-        // Remove Item
-        function removeItem(e) {
-            const id = parseInt(e.target.closest('.cart-item').dataset.id);
-            cart = cart.filter(item => item.id !== id);
-            updateCart();
-        }
-
-        // Filter Menu by Category
-        function filterMenu(category) {
-            if (category === 'all') {
-                displayMenuItems(menuData);
-            } else {
-                const filteredItems = menuData.filter(item => item.category === category);
-                displayMenuItems(filteredItems);
-            }
-        }
-
-        // Checkout
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
-            alert(`Order placed! Total: $${cartTotal.textContent}\nThank you for choosing McDonald's!`);
-            cart = [];
-            updateCart();
-            closeCartModal();
-        }
-
-        // Open Cart Modal
-        function openCartModal() {
-            cartModal.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close Cart Modal
-        function closeCartModal() {
-            cartModal.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Event Listeners
-        cartIcon.addEventListener('click', openCartModal);
-        closeCart.addEventListener('click', closeCartModal);
-        overlay.addEventListener('click', closeCartModal);
-        checkoutBtn.addEventListener('click', checkout);
-
-        // Category Filter Buttons
-        categoryBtns.forEach(button => {
-            button.addEventListener('click', () => {
-                categoryBtns.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                filterMenu(button.dataset.category);
-            });
+// Add to Cart
+function addToCart(e) {
+    const id = parseInt(e.target.dataset.id);
+    const item = menuData.find(item => item.id === id);
+    
+    // Check if item already in cart
+    const existingItem = cart.find(item => item.id === id);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            ...item,
+            quantity: 1
         });
+    }
+    
+    updateCart();
+}
 
-        // Initialize
+// Update Cart
+function updateCart() {
+    // Update cart count
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    cartCount.textContent = totalItems;
+    
+    // Update cart items display
+    cartItemsContainer.innerHTML = cart.map(item => `
+        <div class="cart-item" data-id="${item.id}">
+            <div class="cart-item-image">
+                <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="cart-item-details">
+                <h4>${item.name}</h4>
+                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease">-</button>
+                    <span class="quantity">${item.quantity}</span>
+                    <button class="quantity-btn increase">+</button>
+                </div>
+                <button class="remove-item">Remove</button>
+            </div>
+        </div>
+    `).join("");
+    
+    // Update cart total
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartTotal.textContent = total.toFixed(2);
+    
+    // Add event listeners to quantity buttons
+    document.querySelectorAll(".decrease").forEach(button => {
+        button.addEventListener("click", decreaseQuantity);
+    });
+    
+    document.querySelectorAll(".increase").forEach(button => {
+        button.addEventListener("click", increaseQuantity);
+    });
+    
+    document.querySelectorAll(".remove-item").forEach(button => {
+        button.addEventListener("click", removeItem);
+    });
+}
+
+// Decrease Quantity
+function decreaseQuantity(e) {
+    const id = parseInt(e.target.closest(".cart-item").dataset.id);
+    const item = cart.find(item => item.id === id);
+    
+    if (item.quantity > 1) {
+        item.quantity -= 1;
+    } else {
+        cart = cart.filter(item => item.id !== id);
+    }
+    
+    updateCart();
+}
+
+// Increase Quantity
+function increaseQuantity(e) {
+    const id = parseInt(e.target.closest(".cart-item").dataset.id);
+    const item = cart.find(item => item.id === id);
+    item.quantity += 1;
+    updateCart();
+}
+
+// Remove Item
+function removeItem(e) {
+    const id = parseInt(e.target.closest(".cart-item").dataset.id);
+    cart = cart.filter(item => item.id !== id);
+    updateCart();
+}
+
+// Filter Menu by Category
+function filterMenu(category) {
+    if (category === "all") {
         displayMenuItems(menuData);
+    } else {
+        const filteredItems = menuData.filter(item => item.category === category);
+        displayMenuItems(filteredItems);
+    }
+}
+
+// Checkout
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    
+    alert(`Order placed! Total: $${cartTotal.textContent}\nThank you for choosing McDonald\\'s!`);
+    cart = [];
+    updateCart();
+    closeCartModal();
+}
+
+// Open Cart Modal
+function openCartModal() {
+    cartModal.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+// Close Cart Modal
+function closeCartModal() {
+    cartModal.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "auto";
+}
+
+// Tab Navigation Logic
+function showTabByHash(hash) {
+    const target = document.querySelector(hash) || document.querySelector("#menu");
+    const panes = document.querySelectorAll(".tab-pane");
+    const links = document.querySelectorAll("header nav a[href^=\"#\"]");
+
+    panes.forEach(p => p.classList.toggle("active", p === target));
+    links.forEach(a => {
+        const isActive = a.getAttribute("href") === ("#" + target.id);
+        a.classList.toggle("active", isActive);
+        a.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    const root = document.getElementById("tab-root");
+    if (root) root.focus();
+}
+
+// Handle form submission
+if (contactForm) {
+    contactForm.addEventListener("submit", function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Simulate form submission (e.g., send data to a server)
+        console.log("Form submitted!");
+        // In a real application, you would send the form data to a backend here
+
+        // Display success message
+        if (contactSuccessMessage) {
+            contactSuccessMessage.style.display = "block";
+        }
+
+        // Optionally clear the form
+        contactForm.reset();
+
+        // Hide success message after a few seconds
+        setTimeout(() => {
+            if (contactSuccessMessage) {
+                contactSuccessMessage.style.display = "none";
+            }
+        }, 5000);
+    });
+}
+
+// Event Listeners
+cartIcon.addEventListener("click", openCartModal);
+closeCart.addEventListener("click", closeCartModal);
+overlay.addEventListener("click", closeCartModal);
+checkoutBtn.addEventListener("click", checkout);
+
+// Category Filter Buttons
+categoryBtns.forEach(button => {
+    button.addEventListener("click", () => {
+        categoryBtns.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        filterMenu(button.dataset.category);
+    });
+});
+
+// Initialize
+displayMenuItems(menuData);
+
+// Initial tab load based on hash or default to #menu
+if (!location.hash) {
+    history.replaceState(null, "", "#menu");
+}
+showTabByHash(location.hash);
+window.addEventListener("hashchange", () => showTabByHash(location.hash));
     </script>
 </body>
 </html>
+
