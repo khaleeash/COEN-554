@@ -187,6 +187,101 @@ header nav a.active {
 .login-links a {
     color: var(--mcd-red);
     text-decoration: none;
+    cursor: pointer;
+}
+
+/* Signup Modal */
+.signup-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1001;
+    width: 90%;
+    max-width: 400px;
+    display: none;
+}
+
+.signup-modal.active {
+    display: block;
+}
+
+.signup-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-header h2 {
+    color: var(--mcd-red);
+    margin-bottom: 10px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.signup-form input {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.signup-form button {
+    background-color: var(--mcd-red);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.signup-form button:hover {
+    background-color: #e50000;
+}
+
+.signup-error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.signup-success {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.signup-links {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.signup-links a {
+    color: var(--mcd-red);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.password-requirements {
+    font-size: 12px;
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 15px;
 }
 
 /* Hero Section */
@@ -949,7 +1044,36 @@ footer {
             <div class="login-error" id="login-error">Invalid email or password. Please try again.</div>
         </form>
         <div class="login-links">
-            <a href="#">Forgot Password?</a> | <a href="#">Create Account</a>
+            <a id="forgot-password-link" href="#">Forgot Password?</a> | <a id="show-signup-link" href="#">Create Account</a>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="signup-modal" id="signup-modal">
+        <div class="signup-header">
+            <h2>Create an Account</h2>
+            <p>Join McDonald's rewards program</p>
+        </div>
+        <form class="signup-form" id="signup-form">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" name="name" required placeholder="Enter your full name">
+            
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" required placeholder="Enter your email">
+            
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" required placeholder="Create a password">
+            <div class="password-requirements">Password must be at least 6 characters long</div>
+            
+            <label for="signup-confirm-password">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" name="confirm-password" required placeholder="Confirm your password">
+            
+            <button type="submit">Create Account</button>
+            <div class="signup-error" id="signup-error">Please check your information and try again.</div>
+            <div class="signup-success" id="signup-success">Account created successfully! You can now login.</div>
+        </form>
+        <div class="signup-links">
+            Already have an account? <a id="show-login-link" href="#">Login</a>
         </div>
     </div>
 
@@ -1544,7 +1668,7 @@ const menuData = [
         name: "Happy Meal® Cheeseburger",
         category: "desserts",
         price: 2000,
-        description: "A kid-friendly cheeseburger with a 100% beef patty, cheese, ketchup, pickles, onions, and mustard on a bun.",
+        description: "A kid-friendly cheeseburger with a 100% beef patty, cheese, ketchup, pickules, onions, and mustard on a bun.",
         image: "https://www.mcdonalds.com/is/image/content/dam/usa/nfl/assets/images/isolated/product/hero/Desktop_Happy-Meal-Cheeseburger.png"
     }
 ];
@@ -1570,12 +1694,21 @@ const userInfo = document.getElementById("user-info");
 const userName = document.getElementById("user-name");
 const transactionHistory = document.getElementById("transaction-history");
 const transactionItems = document.getElementById("transaction-items");
+const signupModal = document.getElementById("signup-modal");
+const signupForm = document.getElementById("signup-form");
+const signupError = document.getElementById("signup-error");
+const signupSuccess = document.getElementById("signup-success");
+const showSignupLink = document.getElementById("show-signup-link");
+const showLoginLink = document.getElementById("show-login-link");
 
-// Cart State
+// User accounts and state
 let cart = [];
 let transactions = [];
 let isLoggedIn = false;
 let currentUser = null;
+let userAccounts = [
+    { email: "aminuashiru71@gmail.com", password: "1234", name: "Aminu Ashiru" }
+];
 
 // Display Menu Items
 function displayMenuItems(menuItems) {
@@ -1790,26 +1923,38 @@ function closeLoginModal() {
     document.body.style.overflow = "auto";
 }
 
+// Open Signup Modal
+function openSignupModal() {
+    signupModal.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+// Close Signup Modal
+function closeSignupModal() {
+    signupModal.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "auto";
+}
+
 // Handle Login
 function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     
-    if (email === "aminuashiru71@gmail.com" && password === "1234") {
+    // Find user account
+    const userAccount = userAccounts.find(account => account.email === email && account.password === password);
+    
+    if (userAccount) {
         // Successful login
         isLoggedIn = true;
-        currentUser = {
-            name: "Aminu Ashiru",
-            email: email
-        };
+        currentUser = userAccount;
         
         // Update UI
         userName.textContent = currentUser.name;
         userInfo.style.display = 'block';
         loginLink.textContent = 'Logout';
-        loginLink.removeEventListener('click', openLoginModal);
-        loginLink.addEventListener('click', handleLogout);
         
         // Show transaction history
         transactionHistory.style.display = 'block';
@@ -1823,6 +1968,55 @@ function handleLogin(e) {
     }
 }
 
+// Handle Signup
+function handleSignup(e) {
+    e.preventDefault();
+    const name = document.getElementById("signup-name").value;
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+    const confirmPassword = document.getElementById("signup-confirm-password").value;
+    
+    // Hide previous errors
+    signupError.style.display = "none";
+    signupSuccess.style.display = "none";
+    
+    // Validate form
+    if (password.length < 6) {
+        signupError.textContent = "Password must be at least 6 characters long";
+        signupError.style.display = "block";
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        signupError.textContent = "Passwords do not match";
+        signupError.style.display = "block";
+        return;
+    }
+    
+    // Check if email already exists
+    if (userAccounts.some(account => account.email === email)) {
+        signupError.textContent = "An account with this email already exists";
+        signupError.style.display = "block";
+        return;
+    }
+    
+    // Create new account
+    userAccounts.push({ email, password, name });
+    
+    // Show success message
+    signupSuccess.style.display = "block";
+    
+    // Clear form
+    document.getElementById("signup-form").reset();
+    
+    // After a delay, switch to login form
+    setTimeout(() => {
+        closeSignupModal();
+        openLoginModal();
+        document.getElementById("email").value = email;
+    }, 2000);
+}
+
 // Handle Logout
 function handleLogout(e) {
     e.preventDefault();
@@ -1832,8 +2026,6 @@ function handleLogout(e) {
     // Update UI
     userInfo.style.display = 'none';
     loginLink.textContent = 'Login';
-    loginLink.removeEventListener('click', handleLogout);
-    loginLink.addEventListener('click', openLoginModal);
     
     // Hide transaction history
     transactionHistory.style.display = 'none';
@@ -1890,10 +2082,29 @@ closeCart.addEventListener("click", closeCartModal);
 overlay.addEventListener("click", () => {
     closeCartModal();
     closeLoginModal();
+    closeSignupModal();
 });
 checkoutBtn.addEventListener("click", checkout);
-loginLink.addEventListener("click", openLoginModal);
+loginLink.addEventListener("click", function(e) {
+    e.preventDefault();
+    if (isLoggedIn) {
+        handleLogout(e);
+    } else {
+        openLoginModal();
+    }
+});
 loginForm.addEventListener("submit", handleLogin);
+signupForm.addEventListener("submit", handleSignup);
+showSignupLink.addEventListener("click", function(e) {
+    e.preventDefault();
+    closeLoginModal();
+    openSignupModal();
+});
+showLoginLink.addEventListener("click", function(e) {
+    e.preventDefault();
+    closeSignupModal();
+    openLoginModal();
+});
 
 // Category Filter Buttons
 categoryBtns.forEach(button => {
